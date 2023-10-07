@@ -22,6 +22,12 @@ def register(request):
             )
         # else, proceed with user creation
         else:
+            password = request.data.get("password")
+            if not password:
+                return Response(
+                    {"password": ["This field is required."]},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
             serializer = serializers.UserSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
@@ -29,7 +35,10 @@ def register(request):
                 user.set_password(request.data["password"])
                 user.save()
                 return Response(
-                    {"message": "User registered successfully","username":user.username},
+                    {
+                        "message": "User registered successfully",
+                        "username": user.username,
+                    },
                     status=status.HTTP_201_CREATED,
                 )
     except Exception as e:
