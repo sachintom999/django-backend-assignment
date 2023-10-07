@@ -29,7 +29,7 @@ def register(request):
                 user.set_password(request.data["password"])
                 user.save()
                 return Response(
-                    {"message": "User registered successfully"},
+                    {"message": "User registered successfully","username":user.username},
                     status=status.HTTP_201_CREATED,
                 )
     except Exception as e:
