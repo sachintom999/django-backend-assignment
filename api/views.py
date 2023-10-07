@@ -9,7 +9,7 @@ from . import models, serializers
 
 
 @api_view(["POST"])
-def signup(request):
+def register(request):
     try:
         user = User.objects.filter(username=request.data["username"]).first()
         if user:
@@ -25,18 +25,6 @@ def signup(request):
     except Exception as e:
         print(e)
         return Response({"message": "Registration failed"})
-
-
-@api_view(["POST"])
-def login(request):
-    user = User.objects.filter(username=request.data["username"]).first()
-    if user:
-        if user.check_password(request.data["password"]):
-            return Response({"message": "login success"})
-        else:
-            return Response({"message": "login failed"})
-    else:
-        return Response({"message": "User not found!"})
 
 
 class CreatePostView(CreateAPIView):
