@@ -81,7 +81,7 @@ Provide the required user information (username and password ) in the request bo
 Authentication is implemented using JWT tokens. To obtain an authentication token, use the following endpoint:
 
 ```
-POST /api/auth/token/
+POST /api/auth/login/
 ```
 
 Provide your username and password in the request body, and the server will respond with an access token, which you should include in the `Authorization` header for authenticated requests.
